@@ -6,7 +6,7 @@ execute:
   echo: true
 
 book:
-  title: "YOUR PROJECT TITLE"
+  title: "Fertility Rate Analyzation"
   author:
     - AUTHOR1 (UNI1)
     - AUTHOR2 (UNI2)
