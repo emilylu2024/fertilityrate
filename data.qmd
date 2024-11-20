@@ -57,8 +57,10 @@ expanded_data <- merge(entities, all_years, by = NULL)
 complete_data <- merge(expanded_data, marriage_divorce, 
                        by = c("Country", "Code", "Year"), 
                        all.x = TRUE)
+na_merge_divorce <- sum(is.na(complete_data$DivorceRate))
+na_merge_marriage <- sum(is.na(complete_data$MarriageRate))
 ```
-
+After filling out years that might not included inside the data set that will cause misleading, we have new discovery on missing values. The total sum of missing values in divorce rate column is `r na_merge_divorce`, the total sum of missing values in marriage rate column is `r na_merge_marriage`. 
 ```{r}
 binMat <- rbind(
   Missing = colSums(is.na(complete_data)),
@@ -75,8 +77,7 @@ legend("topright",
        legend = c("Missing values", "Non-Missing values"), 
        fill = c("#4dffd2", "#ff9999"))
 ```
-Firstly, we did a missing value detection of marriage and divorce data after combining them together and
-discovered that there are missing data in Marriage Rate and Divorce Rate as shown in the bar plot.
+Firstly, we did a missing value visualization of marriage and divorce data after combining them together as shown in the bar plot.
 
 ```{r}
 long_data <- complete_data %>%
