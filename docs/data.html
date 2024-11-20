@@ -270,7 +270,7 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>na_marriage <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(marriage_divorce<span class="sc">$</span>MarriageRate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>The total sum of missing values in divorce rate data set is 100, the total sum of missing values in marriage rate data set is 0. After knowing the total sum, we can then proceed for detailed analyzation.</p>
+<p>We still need time to figuring out columns (factors that might influence fertility rates) we need, so here, we start the missing value analysis by focusing on the Marriage Rate and Divorce Rate data. For non-rich countries the data is sparse, so we currently choosing some specific countries for analyzing. The total sum of missing values in divorce rate data set is 100, the total sum of missing values in marriage rate data set is 0. After knowing the total sum, we can then proceed for detailed analyzation.</p>
 <p>2.2 Missing value analysis</p>
 <div class="cell">
 <details class="code-fold">
@@ -280,9 +280,12 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>expanded_data <span class="ot">&lt;-</span> <span class="fu">merge</span>(entities, all_years, <span class="at">by =</span> <span class="cn">NULL</span>)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>complete_data <span class="ot">&lt;-</span> <span class="fu">merge</span>(expanded_data, marriage_divorce, </span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Country"</span>, <span class="st">"Code"</span>, <span class="st">"Year"</span>), </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>na_merge_divorce <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(complete_data<span class="sc">$</span>DivorceRate))</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>na_merge_marriage <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(complete_data<span class="sc">$</span>MarriageRate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>After filling out years that might not included inside the data set that will cause misleading, we have new discovery on missing values. The total sum of missing values in divorce rate column is 447, the total sum of missing values in marriage rate column is 347.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -309,7 +312,6 @@ Attaching package: 'dplyr'</code></pre>
 </div>
 </div>
 </div>
-<p>We still need time to figuring out columns (factors that might influence fertility rates) we need, so here, we start the missing value analysis by focusing on the Marriage Rate and Divorce Rate data. For non-rich countries the data is sparse, so we currently choosing some specific countries for analyzing.</p>
 <p>Firstly, we did a missing value detection of marriage and divorce data after combining them together and discovered that there are missing data in Marriage Rate and Divorce Rate as shown in the bar plot.</p>
 <div class="cell">
 <details class="code-fold">
