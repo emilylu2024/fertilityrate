@@ -12,6 +12,12 @@ The main issue we have for the data is about organization. Since the data we hav
 
 Our plan on importing the data is to download the files from the official website first. After downloading the data, we will first perform some data preprocessing using Excel to ensure that data is in the correct format that can be processed by R. When the data is converted into the suitable format, we will import them in R for further processing and analysis.
 
+Links to our data sources:
+https://unstats.un.org/unsd/demographic-social/products/dyb/#statistics
+https://www.oecd.org/en/data/datasets/oecd-family-database.html
+https://ec.europa.eu/eurostat/web/population-demography/demography-population-stock-balance/database
+https://datacatalog.worldbank.org/search/dataset/0037712/World-Development-Indicators 
+
 
 ## Missing value analysis
 ```{r}
