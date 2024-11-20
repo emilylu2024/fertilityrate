@@ -2,9 +2,18 @@
   {
     "objectID": "index.html",
     "href": "index.html",
+<<<<<<< HEAD
     "title": "Fertility Rate",
     "section": "",
     "text": "1 Introduction\nIn recent years, the decline in fertility rates has become a pronounced pattern observed globally, and experts from various domains, from sociology to economics, are trying to discover the reason behind this phenomenon. This project aims to explore potential factors influencing this trend, including marriage rates, divorce rates, educational attainment, and economical factors like GDP (gross domestic product). Since the trend is observed globally, the scope of our project also includes multiple countries, like the United States, United Kingdom, China, South Korea, to gain a more comprehensive understanding of the decline. By investigating these factors, we hope to uncover meaningful insights into the relationship between the societal structure and individual choices."
+=======
+    "title": "Fertility Rate Analyzation",
+    "section": "",
+    "text": "1 Introduction",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+>>>>>>> 9cf94d093aedbd996f55a99aa5ff05e613fb67ac
   },
   {
     "objectID": "data.html#description",
@@ -18,6 +27,23 @@
     "href": "data.html#missing-value-analysis",
     "title": "2  Data",
     "section": "2.2 Missing value analysis",
+<<<<<<< HEAD
     "text": "2.2 Missing value analysis\n\n\nCode\nlibrary(tidyr)\nlibrary(dplyr)\n\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\n\nCode\nlibrary(ggplot2)\n\n\n\n\nCode\nmarriage_data <- read.csv(\"marriage-rate-per-1000-inhabitants.csv\")\ndivorce_data <- read.csv(\"divorces-per-1000-people.csv\")\n# indicator <- read.csv(\"WDICSV.csv\")\n\n\n\n\nCode\nmarriage_divorce <- marriage_data |> \n  left_join(divorce_data, by = c(\"Entity\", \"Code\", \"Year\")) \nnames(marriage_divorce)[1] <- \"Country\"\nnames(marriage_divorce)[4] <- \"MarriageRate\"\nnames(marriage_divorce)[5] <- \"DivorceRate\"\n\nsum(is.na(marriage_divorce$DivorceRate))\n\n\n[1] 100\n\n\nCode\nsum(is.na(marriage_divorce$MarriageRate))\n\n\n[1] 0\n\n\n2.2 Missing value analysis ::: {.cell}\n\nCode\nall_years <- data.frame(Year = 1960:2018)\nentities <- unique(marriage_divorce[, c(\"Country\", \"Code\")])\nexpanded_data <- merge(entities, all_years, by = NULL)\ncomplete_data <- merge(expanded_data, marriage_divorce, \n                       by = c(\"Country\", \"Code\", \"Year\"), \n                       all.x = TRUE)\n\n:::\n\n\nCode\nbinMat <- rbind(\n  Missing = colSums(is.na(complete_data)),\n  NonMissing = colSums(!is.na(complete_data))\n)\n\nbarplot(binMat, \n        main = \"Missing Values Current Features\", \n        xlab = \"Features\", \n        ylab = \"Count\", \n        col = c(\"#4dffd2\", \"#ff9999\"))\n\nlegend(\"topright\", \n       legend = c(\"Missing values\", \"Non-Missing values\"), \n       fill = c(\"#4dffd2\", \"#ff9999\"))\n\n\n\n\n\nWe still need time to figuring out columns (factors that might influence fertility rates) we need, so here, we start the missing value analysis by focusing on the Marriage Rate and Divorce Rate data. For non-rich countries the data is sparse, so we currently choosing some specific countries for analyzing.\nFirstly, we did a missing value detection of marriage and divorce data after combining them together and discovered that there are missing data in Marriage Rate and Divorce Rate as shown in the bar plot.\n\n\nCode\nlong_data <- complete_data %>%\n  pivot_longer(cols = c(\"MarriageRate\", \"DivorceRate\"), # Include only relevant columns\n               names_to = \"Variable\", values_to = \"Value\") %>%\n  mutate(Missing = is.na(Value)) \n\nggplot(long_data, aes(x = Year, y = Country, color = Missing)) +\n  geom_point(alpha = 0.6, size = 2) +\n  scale_color_manual(values = c(\"TRUE\" = \"red\", \"FALSE\" = \"blue\"),\n                     labels = c(\"Available\", \"Missing\")) +\n  facet_wrap(~Variable, scales = \"free_y\") +\n  labs(title = \"Missing Values Across Years and Countries\",\n       x = \"Year\", y = \"Country\", color = \"Data Status\") +\n  theme_minimal() +\n  theme(axis.text.x = element_text(),\n        strip.text = element_text(face = \"bold\"))\n\n\n\n\n\nWe then delve in detail how the missing value is spreading in different countries and figured out that United State, United Kingdom, South Korea, Norway, and Italy have more available data that can be used for analyzing. While Singapore, Peru, Bolivia and Argentina seems to have a lot of missing values in both Marriage Rate and Divorce rate."
+=======
+    "text": "2.2 Missing value analysis",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
+    ]
+  },
+  {
+    "objectID": "data.html",
+    "href": "data.html",
+    "title": "2  Data",
+    "section": "",
+    "text": "2.1 Description",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
+    ]
+>>>>>>> 9cf94d093aedbd996f55a99aa5ff05e613fb67ac
   }
 ]
