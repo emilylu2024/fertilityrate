@@ -6,19 +6,11 @@ execute:
   echo: true
 
 book:
-<<<<<<< HEAD
-  title: "Fertility Rate"
+  title: "Fertility Rate Analyzation"
   author:
     - Jingjing Dong (4125)
     - Emily Lu (2775)
   repo-url: https://github.com/emilylu2024/fertilityrate
-=======
-  title: "Fertility Rate Analyzation"
-  author:
-    - AUTHOR1 (UNI1)
-    - Jingjing Dong (jd4125)
-  repo-url: https://github.com/YOUR_GITHUB_ACCOUNT/REPO_NAME
->>>>>>> 9cf94d093aedbd996f55a99aa5ff05e613fb67ac
   date: today
   page-footer:
     right: |
