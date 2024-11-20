@@ -43,10 +43,11 @@ names(marriage_divorce)[1] <- "Country"
 names(marriage_divorce)[4] <- "MarriageRate"
 names(marriage_divorce)[5] <- "DivorceRate"
 
-sum(is.na(marriage_divorce$DivorceRate))
-sum(is.na(marriage_divorce$MarriageRate))
+na_divorce <- sum(is.na(marriage_divorce$DivorceRate))
+na_marriage <- sum(is.na(marriage_divorce$MarriageRate))
 ```
-
+We still need time to figuring out columns (factors that might influence fertility rates) we need, so here,
+we start the missing value analysis by focusing on the Marriage Rate and Divorce Rate data. For non-rich countries the data is sparse, so we currently choosing some specific countries for analyzing. The total sum of missing values in divorce rate data set is `r na_divorce`, the total sum of missing values in marriage rate data set is `r na_marriage`. After knowing the total sum, we can then proceed for detailed analyzation.
 
 2.2 Missing value analysis
 ```{r}
@@ -74,12 +75,8 @@ legend("topright",
        legend = c("Missing values", "Non-Missing values"), 
        fill = c("#4dffd2", "#ff9999"))
 ```
-We still need time to figuring out columns (factors that might influence fertility rates) we need, so here,
-we start the missing value analysis by focusing on the Marriage Rate and Divorce Rate data. For non-rich countries the data is sparse, so we currently choosing some specific countries for analyzing.
-
 Firstly, we did a missing value detection of marriage and divorce data after combining them together and
 discovered that there are missing data in Marriage Rate and Divorce Rate as shown in the bar plot.
-
 
 ```{r}
 long_data <- complete_data %>%
