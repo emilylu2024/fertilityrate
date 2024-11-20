@@ -6,11 +6,11 @@ execute:
   echo: true
 
 book:
-  title: "YOUR PROJECT TITLE"
+  title: "Fertility Rate"
   author:
-    - AUTHOR1 (UNI1)
-    - AUTHOR2 (UNI2)
-  repo-url: https://github.com/YOUR_GITHUB_ACCOUNT/REPO_NAME
+    - Jingjing Dong (4125)
+    - Emily Lu (2775)
+  repo-url: https://github.com/emilylu2024/fertilityrate
   date: today
   page-footer:
     right: |
