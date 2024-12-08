@@ -1,0 +1,148 @@
+---
+title: "data_clean"
+author: "Emily Lu"
+date: '2024-12-03'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r cars}
+library(readr)
+library(tidyverse)
+library(dplyr)
+```
+
+## Fertility Rate
+
+```{r}
+fertility_rate<- read_csv("/Users/emilyl/Desktop/fertilityrate/fertility_rate.csv")
+head(fertility_rate)
+fertility_rate <- fertility_rate[,-c(3,4)]
+head(fertility_rate)
+```
+
+```{r}
+fertility_long <- fertility_rate %>%
+  pivot_longer(cols = 3:65, 
+               names_to = "Year", 
+               values_to = "fertility_rate")
+
+colnames(fertility_long)[1] <- "Country"
+colnames(fertility_long)[2] <- "Code"
+
+write.csv(fertility_long, 
+          file = "/Users/emilyl/Desktop/fertilityrate/fertility_long.csv", 
+          row.names = FALSE)
+```
+
+
+## Education
+```{r}
+education <- read_csv("/Users/emilyl/Desktop/fertilityrate/education.csv")
+head(education)
+```
+
+```{r}
+education <- education %>%
+  mutate(education_level = recode(`Indicator Name`,
+                           "Educational attainment, at least Bachelor's or equivalent, population 25+, female (%) (cumulative)" = "Bachelor's or equivalent",
+                           "Educational attainment, at least Master's or equivalent, population 25+, female (%) (cumulative)" = "Master's or equivalent",
+                           "Educational attainment, Doctoral or equivalent, population 25+, female (%) (cumulative)" = "Doctoral or equivalent"))
+
+
+education <- education[,-3]
+
+education <- education %>%
+  relocate(education_level, .after = `Country Code`)
+
+colnames(education)[1] <- "Country"
+colnames(education)[2] <- "Code"
+
+head(education)
+```
+
+```{r}
+education_long <- education %>%
+  pivot_longer(cols = 4:24, 
+               names_to = "Year", 
+               values_to = "educational_attainment")
+
+head(education_long)
+```
+
+```{r}
+write.csv(education_long, 
+          file = "/Users/emilyl/Desktop/fertilityrate/education_long.csv", 
+          row.names = FALSE)
+```
+
+
+## GDP
+```{r}
+gdp <- read_csv("/Users/emilyl/Desktop/fertilityrate/gdp.csv")
+head(gdp)
+gdp <- gdp[,-c(3,4)]
+head(gdp)
+```
+
+```{r}
+gdp_long <- gdp %>%
+  pivot_longer(cols = 3:66, 
+               names_to = "Year", 
+               values_to = "gdp_growth")
+head(gdp_long)
+colnames(gdp_long)[1] <- "Country"
+colnames(gdp_long)[2] <- "Code"
+head(gdp_long)
+```
+
+```{r}
+write.csv(gdp_long, 
+          file = "/Users/emilyl/Desktop/fertilityrate/gdp_long.csv", 
+          row.names = FALSE)
+```
+
+## Life Expectancy
+
+```{r}
+life_expect<- read_csv("/Users/emilyl/Desktop/fertilityrate/life_expectancy.csv")
+head(life_expect)
+```
+
+```{r}
+life_expect <- life_expect %>%
+  mutate(Gender = recode(`Indicator Name`,
+                           "Life expectancy at birth, female (years)" = "Female",
+                           "Life expectancy at birth, male (years)" = "Male",
+                           "Life expectancy at birth, total (years)" = "Both"))
+head(life_expect)
+
+life_expect <- life_expect[,-c(3,4)]
+head(life_expect)
+
+life_expect <- life_expect %>%
+  relocate(Gender, .after = `Country Code`)
+head(life_expect)
+
+colnames(life_expect)[1] <- "Country"
+colnames(life_expect)[2] <- "Code"
+
+head(life_expect)
+```
+
+```{r}
+life_long <- life_expect %>%
+  pivot_longer(cols = 4:66, 
+               names_to = "Year", 
+               values_to = "life_expectancy")
+head(life_long)
+```
+
+```{r}
+write.csv(life_long, 
+          file = "/Users/emilyl/Desktop/fertilityrate/life_long.csv", 
+          row.names = FALSE)
+```
