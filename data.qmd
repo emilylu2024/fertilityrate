@@ -21,12 +21,17 @@ https://datacatalog.worldbank.org/search/dataset/0037712/World-Development-Indic
 library(tidyr)
 library(dplyr)
 library(ggplot2)
+library(naniar)
+library(reshape2)
 ```
 
 ```{r}
 marriage_data <- read.csv("marriage-rate-per-1000-inhabitants.csv")
 divorce_data <- read.csv("divorces-per-1000-people.csv")
-# indicator <- read.csv("WDICSV.csv")
+education_data <- read.csv("education_long.csv")
+fertility_data <- read.csv("fertility_long.csv")
+gdp_data <- read.csv("gdp_long.csv")
+life_data <- read.csv("life_long.csv")
 ```
 
 ```{r}
@@ -36,59 +41,57 @@ names(marriage_divorce)[1] <- "Country"
 names(marriage_divorce)[4] <- "MarriageRate"
 names(marriage_divorce)[5] <- "DivorceRate"
 
-na_divorce <- sum(is.na(marriage_divorce$DivorceRate))
-na_marriage <- sum(is.na(marriage_divorce$MarriageRate))
+filtered_education <- education_data |> 
+  filter(Country %in% marriage_divorce$Country & Year %in% marriage_divorce$Year)
+
+filtered_fertility <- fertility_data |> 
+  filter(Country %in% marriage_divorce$Country & Year %in% marriage_divorce$Year)
+
+filtered_gdp <- gdp_data |> 
+  filter(Country %in% marriage_divorce$Country & Year %in% marriage_divorce$Year)
+
+filtered_life <- life_data |> 
+  filter(Country %in% marriage_divorce$Country & Year %in% marriage_divorce$Year)
+
+final_data <- marriage_divorce |>
+  left_join(filtered_education, by = c("Country", "Code", "Year")) |>
+  left_join(filtered_fertility, by = c("Country", "Code", "Year")) |>
+  left_join(filtered_gdp, by = c("Country", "Code", "Year")) |>
+  left_join(filtered_life, by = c("Country", "Code", "Year"))
+
+colSums(is.na(final_data))
 ```
-We still need time to figuring out columns (factors that might influence fertility rates) we need, so here,
-we start the missing value analysis by focusing on the Marriage Rate and Divorce Rate data. For non-rich countries the data is sparse, so we currently choosing some specific countries for analyzing. The total sum of missing values in divorce rate data set is `r na_divorce`, the total sum of missing values in marriage rate data set is `r na_marriage`. After knowing the total sum, we can then proceed for detailed analyzation.
 
 ```{r}
-all_years <- data.frame(Year = 1960:2018)
-entities <- unique(marriage_divorce[, c("Country", "Code")])
-expanded_data <- merge(entities, all_years, by = NULL)
-complete_data <- merge(expanded_data, marriage_divorce, 
-                       by = c("Country", "Code", "Year"), 
-                       all.x = TRUE)
-na_merge_divorce <- sum(is.na(complete_data$DivorceRate))
-na_merge_marriage <- sum(is.na(complete_data$MarriageRate))
-```
-After filling out years that might not included inside the data set that will cause misleading, we have new discovery on missing values. The total sum of missing values in divorce rate column is `r na_merge_divorce`, the total sum of missing values in marriage rate column is `r na_merge_marriage`. 
-```{r}
-binMat <- rbind(
-  Missing = colSums(is.na(complete_data)),
-  NonMissing = colSums(!is.na(complete_data))
+missing_values <- colSums(is.na(final_data))
+
+missing_data_df <- data.frame(
+  Column = names(missing_values),
+  MissingCount = missing_values
 )
 
-barplot(binMat, 
-        main = "Missing Values Current Features", 
-        xlab = "Features", 
-        ylab = "Count", 
-        col = c("#4dffd2", "#ff9999"))
+missing_proportion <- missing_values / nrow(final_data)
+missing_data_df$Proportion <- missing_proportion
 
-legend("topright", 
-       legend = c("Missing values", "Non-Missing values"), 
-       fill = c("#4dffd2", "#ff9999"))
+ggplot(missing_data_df, aes(x = reorder(Column, -Proportion), y = Proportion)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Proportion of Missing Values per Column",
+       x = "Columns",
+       y = "Proportion of Missing Values") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
-Firstly, we did a missing value visualization of marriage and divorce data after combining them together as shown in the bar plot.
-
+We merged all relevant features with fertility rate into our final data set and first doing a bar plot visualizing porprotion of missing value in each column. Educational_attainment have the highest proportion of missing values, exceeding 50%. Columns like DivorceRate have a moderate proportion of missing values (around 20–40%). Columns such as gdp_growth, fertility_rate, Gender, life_expectancy, Code, Country, MarriageRate, and Year appear to have minimal or no missing values, making them more reliable for immediate use. 
 ```{r}
-long_data <- complete_data %>%
-  pivot_longer(cols = c("MarriageRate", "DivorceRate"), # Include only relevant columns
-               names_to = "Variable", values_to = "Value") %>%
-  mutate(Missing = is.na(Value)) 
+time_missing <- final_data %>%
+  group_by(Year) %>%
+  summarise(MissingCount = sum(is.na(.))) 
 
-ggplot(long_data, aes(x = Year, y = Country, color = Missing)) +
-  geom_point(alpha = 0.6, size = 2) +
-  scale_color_manual(values = c("TRUE" = "red", "FALSE" = "blue"),
-                     labels = c("Available", "Missing")) +
-  facet_wrap(~Variable, scales = "free_y") +
-  labs(title = "Missing Values Across Years and Countries",
-       x = "Year", y = "Country", color = "Data Status") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(),
-        strip.text = element_text(face = "bold"))
+ggplot(time_missing, aes(x = Year, y = MissingCount)) +
+  geom_line(color = "red") +
+  geom_point() +
+  labs(title = "Missing Values Over Time", x = "Year", y = "Count of Missing Values") +
+  theme_minimal()
 ```
-We then delve in detail how the missing value is spreading in different countries and figured 
-out that United State, United Kingdom, South Korea, Norway, and Italy have more available data 
-that can be used for analyzing. While Singapore, Peru, Bolivia and Argentina seems to have a lot
-of missing values in both Marriage Rate and Divorce rate.
+We also see if the number of missing value changes with time. From the plot above, the count of missing values appears nearly constant across all years in the data set. There are no visible spikes or drops in missing values over time.This consistency suggests that missingness is not influenced by temporal factors. The uniformity could indicate systematic missingness, where data is consistently missing for specific features, countries, or regions across all years.
+
+
