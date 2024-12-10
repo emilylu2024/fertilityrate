@@ -34,7 +34,7 @@ gdp_data <- read.csv("gdp_long.csv")
 life_data <- read.csv("life_long.csv")
 ```
 
-```{r}
+```{r,warning = FALSE}
 marriage_divorce <- marriage_data |> 
   left_join(divorce_data, by = c("Entity", "Code", "Year")) 
 names(marriage_divorce)[1] <- "Country"
@@ -61,6 +61,7 @@ final_data <- marriage_divorce |>
 
 colSums(is.na(final_data))
 ```
+The above result shows how many missing value are there in each feature. After knowing the exact value, we can then doing visualization for better analyzing missing patterns.
 
 ```{r}
 missing_values <- colSums(is.na(final_data))
@@ -93,5 +94,3 @@ ggplot(time_missing, aes(x = Year, y = MissingCount)) +
   theme_minimal()
 ```
 We also see if the number of missing value changes with time. From the plot above, the count of missing values appears nearly constant across all years in the data set. There are no visible spikes or drops in missing values over time.This consistency suggests that missingness is not influenced by temporal factors. The uniformity could indicate systematic missingness, where data is consistently missing for specific features, countries, or regions across all years.
-
-
