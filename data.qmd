@@ -94,3 +94,11 @@ ggplot(time_missing, aes(x = Year, y = MissingCount)) +
   theme_minimal()
 ```
 We also see if the number of missing value changes with time. From the plot above, the count of missing values appears nearly constant across all years in the data set. There are no visible spikes or drops in missing values over time.This consistency suggests that missingness is not influenced by temporal factors. The uniformity could indicate systematic missingness, where data is consistently missing for specific features, countries, or regions across all years.
+```{r}
+gg_miss_fct(final_data, fct = Country) +
+  labs(title = "Missing Values by Country",
+       x = "Country",
+       y = "Proportion of Missing Values") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
