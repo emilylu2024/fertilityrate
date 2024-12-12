@@ -3,6 +3,20 @@
 <style>
   * {
     font-family: sans-serif;
+    .tooltip {
+      position: absolute;
+      text-align: center;
+      width: auto;
+      height: auto;
+      padding: 8px;
+      font-size: 12px;
+      background: lightgray;
+      border: 1px solid black;
+      border-radius: 5px;
+      pointer-events: none; /* Important to avoid interfering with mouse events */
+      opacity: 0; /* Hidden by default */
+      transition: opacity 0.2s; /* Smooth transition for visibility */
+  }
   }
 </style> 
 
