@@ -8,8 +8,8 @@ execute:
 book:
   title: "Fertility Rate Analyzation"
   author:
-    - Jingjing Dong (4125)
-    - Emily Lu (2775)
+    - Jingjing Dong (jd4125)
+    - Emily Lu (bl2775)
   repo-url: https://github.com/emilylu2024/fertilityrate
   date: today
   page-footer:
