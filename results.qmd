@@ -141,7 +141,7 @@ title <- ggdraw() +
 plot_grid(title, combined, ncol = 1, rel_heights = c(0.1, 1))
 ```
 
-This visualization above illustrates the global trend of fertility rate from 1970 to 2020. It appears that regions with higher fertility rates, colored in blue in the graph, have diminished over the decades. On the other hand, areas with a lower fertility rate, colored in red, have increased significantly over the decades, expanding across Europe, the Americas, and parts of Asia. This trend reflects a global shift toward a lower fertility rate, which might be driven by improvements in education, healthcare, and economics. 
+This visualization above illustrates the global trend of fertility rate from 1970 to 2020. It appears that regions with higher fertility rates (colored in blue) have diminished over the decades. On the other hand, areas with a lower fertility rate (colored in red) have increased significantly over the decades, expanding across Europe, the Americas, and parts of Asia. This trend reflects a global shift toward a lower fertility rate, which might be driven by improvements in education, healthcare, and economics. 
 
 The shape file used to make this graph is obtained from the link shown below:
 https://www.geoboundaries.org/globalDownloads.html
@@ -188,7 +188,7 @@ ggplot(scaled_gdp, aes(x = Year)) +
   theme_minimal()
 ```
 
-This graph highlights the relationship between the average fertility rates (blue line) and the average GDP growth rate(red line) across the globe from 1960 to 2020. The y-axis displays the scaled value for these two variables because of the differences in their measuring units. Over the decades, fertility rates have shown a consistent declining trend, reflecting a shift towards a lower level of offspring. On the other hand, GDP growth has fluctuated over the years, revealing periods of economic growth and recessions, with two noticeable drops around 2010 and 2020, when global crises like the Great Recession and the COVID-19 pandemic happened. The steady decline in fertility rates with the fluctuation shown in GDP growth rate indicates that the changes in fertility rate are independent of the variations in the country's economic health.
+This graph highlights the relationship between the average fertility rates (blue line) and the average GDP growth rate (red line) across the globe from 1960 to 2020. The y-axis displays the scaled value for these two variables because of the differences in their measuring units. Over the decades, fertility rates have shown a consistent declining trend. On the other hand, GDP growth has fluctuated over the years, revealing periods of economic growth and recessions, with two noticeable drops around 2010 and 2020, when global crises like the Great Recession and the COVID-19 pandemic happened. The steady decline in fertility rates with the fluctuation shown in GDP growth rate indicates that the changes in fertility rate are independent of the variations in the country's economic health.
 
 ## Fertility Rate Density Plot by High vs Low GDP Countries
 ```{r}
@@ -341,7 +341,7 @@ ggplot(scaled_data, aes(x = Year)) +
         panel.grid.minor = element_blank())
 ```
 
-The graph explores the relationship between fertility rates and educational attainment, represented by the black lines and blue bars in the graph, respectively. The fertility rate is measured by the number of children per woman, but educational attainment is measured in the percentage of people with a bachelor's degree or higher. Due to the difference in the units of these two metrics, their values are scaled to ensure comparability. The scaled value is displayed on the y-axis and ranges from 0 to 1. The countries shown in the graph are chosen from multiple continents, including Europe, the Americas, and  Asia-Pacific, to offer a global insight into trends. For these countries, the visualization demonstrates that fertility rates decrease as educational attainment increases from 2014 to 2022. This finding suggests that the global decrease in fertility rate might be associated with higher education levels developed in recent years.
+The graph explores the relationship between fertility rates and educational attainment, represented by the black lines and blue bars, respectively. The values displayed on the y-axis are scaled to ensure comparability. The countries shown in the graph are chosen from multiple continents, including Europe, the Americas, and  Asia-Pacific, to offer a global insight into trends. For these countries, the visualization demonstrates that fertility rates decrease as educational attainment increases from 2014 to 2022. This finding suggests that the global decrease in fertility rate might be associated with the elevation in education levels in recent years.
 
 
 ## Tracking Fertility Rate and Life Expectancy Trends Across Decades
@@ -391,7 +391,7 @@ ggplot(scaled_life_10, aes(y = Code)) +
   )
 ```
 
-This visualization shows the changes in fertility rates (blue dots) and life expectancy (red dots and measured in years) for various countries from 1960 to 2020. The values for these two variables are scaled as well due to the differences in their measuring units. The countries are the same as in the last graph, except for the addition of Peru, which is absent from the previous graph due to the lack of data. The graph displays a steadily increasing trend for life expectancy as fertility rates decrease over the years. Despite the regional differences in the changing rate, the opposing pattern shown in the graph suggests that improvement in healthcare might be associated negatively with the fertility rate, resulting in a reduction in family size.
+This visualization shows the changes in fertility rates (blue dots) and life expectancy (red dots) for various countries from 1960 to 2020. The values are scaled for comparion. Countries included in this graph is the same as the last one except for the addition of Peru, which is absent from the previous graph due to the lack of data. The graph displays a steadily increasing trend for life expectancy as fertility rates decrease over the years. Despite the regional differences in the changing rate, the opposing pattern shown in the graph suggests that improvement in healthcare might be negatively associated with the fertility rate.
 
 ## The Relationship between Marriage Rate and Fertility Rate
 ```{r,warning = FALSE}
@@ -464,7 +464,7 @@ ggplot(life_marriage_scaled, aes(x = Year)) +
         panel.spacing = unit(1, "lines"))
 ```
 
-This graph follows the previous exploration of fertility and marriage rates, which showed a positive association between the two metrics. Considering a previous graph demonstrates a negative association between life expectancy and fertility rate, this graph examines the relationship between marriage rates and life expectancy from 1960 to 2020 across different countries. The values of both variables are scaled due to differences in measuring units. While the visualization exhibits a steady trend of increasing life expectancy, marriage rates have been consistently decreasing in most countries. The trend observed here uncovers a global trend of people living longer lives but marrying less often, which could be one of the factors influencing family structures and leading to changes in the fertility rate. While the overall trend is global, the rate and the extent of changes remain regional, which could be influenced by other factors, like economic growth.
+This graph provides a further investigation on the previous exploration of fertility and marriage rates. Since in previous exploration, we found a negative association between life expectancy and fertility rate, this graph is made to examine the relationship between marriage rates and life expectancy from 1960 to 2020. The values of both variables are scaled to avoid bias in comparison. While the visualization exhibits a steady trend of increasing life expectancy, marriage rates have been consistently decreasing across the years. Despite the rate and the extent of changes vary by country, the overall trend is shared globally, which could be one of the factors influencing family structures and leading to changes in the fertility rate.
 
 ## The Relationship between Marriage Rate and Divorce Rate
 ```{r,warning=FALSE}
