@@ -1,5 +1,9 @@
 # Interactive graph
 
+## Interactive Correlation Matrix
+ 
+The correlation matrix below is designed to be interactive to allow users to explore the relationships between different combinations of variables in the dataset. <b>To interact, simply hover over any cell of interest to see the exact correlation value displayed.</b> This interaction allows a more detailed exploration of the correlation between each variable, especially for cells with lighter colors. This function allows users to analyze and distinguish the differences in correlations between variables more accurately and simplistically than using a static graph.
+
 <html>
 <head>
   <style>
@@ -27,17 +31,6 @@
 
 
 <body>
-  <h4 id="title" style="text-align: center; font-family: sans-serif; margin-top: 10px; margin-bottom: 10px;">
-    Instructions for Using the Interactive Correlation Matrix
-  </h4>
-
-
-  <div id="instructions" style="margin-bottom: 10px; font-family: sans-serif; font-size: 14px;">
-    The correlation matrix below is designed to be interactive to allow users to explore the relationships between different combinations of variables in the dataset. <b>To interact, simply hover over any cell of interest to see the exact correlation value displayed.</b> This interaction allows a more detailed exploration of the correlation between each variable, especially for cells with lighter colors. This function allows users to analyze and distinguish the differences in correlations between variables more accurately and simplistically than using a static graph.
-  </div>
-
-
-
   <div id="plot">
   </div>
 

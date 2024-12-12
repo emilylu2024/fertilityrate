@@ -154,5 +154,19 @@
     "title": "5  Conclusion",
     "section": "",
     "text": "Based on our exploration, we found that fertility rates decline when life expectancy and the percentage of educational attainment increase. On the other hand, fertility and marriage rates have a positive correlation as they both demonstrate a declining trend across the globe. To our surprise, changes in divorce rates and GDP growth seem to be independent of the changes in fertility rates. In our further investigation of these two variables, we find that divorce rates are positively correlated with the marriage rate, while GDP growth is independent of the changes in marriage rates. This finding indicates that societal factors are probably more influential to changes in marriage rates than economic factors. Due to the lack of data for low-income countries and earlier periods in educational attainment, our analysis is limited to the countries that have middle or high incomes and time after 2014, which restricts the scope of our findings and might contribute to the differences between correlation matrix result and the findings shown by our graph. In the future, we could focus more on the direction of educational attainment to improve the strength of the conclusion by including a broader range of data in our analysis. In summary, the global decline in the fertility rate is associated with the improvement in healthcare and education and the decline in the marriage rate."
+  },
+  {
+    "objectID": "d3graph.html#instructions-for-using-the-interactive-correlation-matrix",
+    "href": "d3graph.html#instructions-for-using-the-interactive-correlation-matrix",
+    "title": "4  Interactive graph",
+    "section": "4.1 Instructions for Using the Interactive Correlation Matrix",
+    "text": "4.1 Instructions for Using the Interactive Correlation Matrix\nThe correlation matrix below is designed to be interactive to allow users to explore the relationships between different combinations of variables in the dataset. To interact, simply hover over any cell of interest to see the exact correlation value displayed. This interaction allows a more detailed exploration of the correlation between each variable, especially for cells with lighter colors. This function allows users to analyze and distinguish the differences in correlations between variables more accurately and simplistically than using a static graph."
+  },
+  {
+    "objectID": "d3graph.html#interactive-correlation-matrix",
+    "href": "d3graph.html#interactive-correlation-matrix",
+    "title": "4  Interactive graph",
+    "section": "4.1 Interactive Correlation Matrix",
+    "text": "4.1 Interactive Correlation Matrix\nThe correlation matrix below is designed to be interactive to allow users to explore the relationships between different combinations of variables in the dataset. To interact, simply hover over any cell of interest to see the exact correlation value displayed. This interaction allows a more detailed exploration of the correlation between each variable, especially for cells with lighter colors. This function allows users to analyze and distinguish the differences in correlations between variables more accurately and simplistically than using a static graph."
   }
 ]

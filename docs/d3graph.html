@@ -54,7 +54,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
 </head>
-<body class="floating fullcontent">
+<body class="floating">
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -114,12 +114,23 @@
     </div>
 </nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#interactive-correlation-matrix" class="nav-link active" data-scroll-target="#interactive-correlation-matrix"> <span class="header-section-number">4.1</span> Interactive Correlation Matrix</a></li>
+</ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/emilylu2024/fertilityrate/edit/main/d3graph.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/emilylu2024/fertilityrate/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <header id="title-block-header">
 <h1 class="title d-none d-lg-block display-7"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive graph</span></h1>
 </header>
+
+<section id="interactive-correlation-matrix" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="interactive-correlation-matrix"><span class="header-section-number">4.1</span> Interactive Correlation Matrix</h2>
+<p>The correlation matrix below is designed to be interactive to allow users to explore the relationships between different combinations of variables in the dataset. <b>To interact, simply hover over any cell of interest to see the exact correlation value displayed.</b> This interaction allows a more detailed exploration of the correlation between each variable, especially for cells with lighter colors. This function allows users to analyze and distinguish the differences in correlations between variables more accurately and simplistically than using a static graph.</p>
 
 
 <style>
@@ -144,12 +155,6 @@
   </style>
 
 
-<h4 id="title" style="text-align: center; font-family: sans-serif; margin-top: 10px; margin-bottom: 10px;" class="anchored">
-Instructions for Using the Interactive Correlation Matrix
-</h4>
-<div id="instructions" style="margin-bottom: 10px; font-family: sans-serif; font-size: 14px;">
-<pre><code>The correlation matrix below is designed to be interactive to allow users to explore the relationships between different combinations of variables in the dataset. &lt;b&gt;To interact, simply hover over any cell of interest to see the exact correlation value displayed.&lt;/b&gt; This interaction allows a more detailed exploration of the correlation between each variable, especially for cells with lighter colors. This function allows users to analyze and distinguish the differences in correlations between variables more accurately and simplistically than using a static graph.</code></pre>
-</div>
 <div id="plot">
 
 </div>
@@ -159,6 +164,7 @@ Instructions for Using the Interactive Correlation Matrix
 
 
 
+</section>
 </main> <!-- /main -->
 <script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
