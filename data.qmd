@@ -25,12 +25,12 @@ library(naniar)
 ```
 
 ```{r}
-marriage_data <- read.csv("marriage-rate-per-1000-inhabitants.csv")
-divorce_data <- read.csv("divorces-per-1000-people.csv")
-education_data <- read.csv("education_long.csv")
-fertility_data <- read.csv("fertility_long.csv")
-gdp_data <- read.csv("gdp_long.csv")
-life_data <- read.csv("life_long.csv")
+marriage_data <- read.csv("data_raw/marriage-rate-per-1000-inhabitants.csv")
+divorce_data <- read.csv("data_raw/divorces-per-1000-people.csv")
+education_data <- read.csv("data_clean/education_long.csv")
+fertility_data <- read.csv("data_clean/fertility_long.csv")
+gdp_data <- read.csv("data_clean/gdp_long.csv")
+life_data <- read.csv("data_clean/life_long.csv")
 ```
 
 ```{r,warning = FALSE}

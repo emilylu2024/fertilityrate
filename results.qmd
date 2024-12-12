@@ -15,8 +15,8 @@ suppressPackageStartupMessages(library(jsonlite))
 
 ## Global Fertility Trends: A 50-Year View (1970–2020)
 ```{r}
-fertility_rate<- read_csv("fertility_long.csv", show_col_types = FALSE)
-marriage_rate <- read_csv("marriage-rate-per-1000-inhabitants.csv",
+fertility_rate<- read_csv("data_clean/fertility_long.csv", show_col_types = FALSE)
+marriage_rate <- read_csv("data_raw/marriage-rate-per-1000-inhabitants.csv",
                           show_col_types = FALSE)
 ```
 
@@ -142,9 +142,12 @@ plot_grid(title, combined, ncol = 1, rel_heights = c(0.1, 1))
 
 This visualization above illustrates the global trend of fertility rate from 1970 to 2020. It appears that regions with higher fertility rates, colored in blue in the graph, have diminished over the decades. On the other hand, areas with a lower fertility rate, colored in red, have increased significantly over the decades, expanding across Europe, the Americas, and parts of Asia. This trend reflects a global shift toward a lower fertility rate, which might be driven by improvements in education, healthcare, and economics. 
 
+The shape file used to make this graph is obtained from the link shown below:
+https://www.geoboundaries.org/globalDownloads.html
+
 ## How Fertility Rates and GDP Growth Have Evolved Globally Over Time
 ```{r}
-gdp <- read_csv("gdp_long.csv", show_col_types = FALSE)
+gdp <- read_csv("data_clean/gdp_long.csv", show_col_types = FALSE)
 ```
 
 ```{r}
@@ -188,12 +191,12 @@ This graph highlights the relationship between the average fertility rates (blue
 
 ## Fertility Rate Density Plot by High vs Low GDP Countries
 ```{r}
-marriage_data <- read.csv("marriage-rate-per-1000-inhabitants.csv")
-divorce_data <- read.csv("divorces-per-1000-people.csv")
-education_data <- read.csv("education_long.csv")
-fertility_data <- read.csv("fertility_long.csv")
-gdp_data <- read.csv("gdp_long.csv")
-life_data <- read.csv("life_long.csv")
+marriage_data <- read.csv("data_raw/marriage-rate-per-1000-inhabitants.csv")
+divorce_data <- read.csv("data_raw/divorces-per-1000-people.csv")
+education_data <- read.csv("data_clean/education_long.csv")
+fertility_data <- read.csv("data_clean/fertility_long.csv")
+gdp_data <- read.csv("data_clean/gdp_long.csv")
+life_data <- read.csv("data_clean/life_long.csv")
 ```
 
 ```{r, warning=FALSE}
@@ -251,7 +254,7 @@ The above plot is a density plot comparing the distribution of fertility rates f
 
 ## The Relationship Between Education Levels and Fertility Rates
 ```{r}
-education <- read_csv("education_long.csv", show_col_types = FALSE)
+education <- read_csv("data_clean/education_long.csv", show_col_types = FALSE)
 
 code <- unique(marriage_rate$Code)
 
@@ -334,7 +337,7 @@ The graph explores the relationship between fertility rates and educational atta
 
 ## Tracking Fertility Rate and Life Expectancy Trends Across Decades
 ```{r}
-life_expectancy <- read_csv("life_long.csv", show_col_types = FALSE)
+life_expectancy <- read_csv("data_clean/life_long.csv", show_col_types = FALSE)
 row <- which(life_expectancy$Gender == "Both")
 life_both <- life_expectancy[row,]
 
