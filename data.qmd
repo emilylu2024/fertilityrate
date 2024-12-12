@@ -41,16 +41,20 @@ names(marriage_divorce)[4] <- "MarriageRate"
 names(marriage_divorce)[5] <- "DivorceRate"
 
 filtered_education <- education_data |> 
-  filter(Country %in% marriage_divorce$Country & Year %in% marriage_divorce$Year)
+  filter(Country %in% marriage_divorce$Country & 
+           Year %in% marriage_divorce$Year)
 
 filtered_fertility <- fertility_data |> 
-  filter(Country %in% marriage_divorce$Country & Year %in% marriage_divorce$Year)
+  filter(Country %in% marriage_divorce$Country & 
+           Year %in% marriage_divorce$Year)
 
 filtered_gdp <- gdp_data |> 
-  filter(Country %in% marriage_divorce$Country & Year %in% marriage_divorce$Year)
+  filter(Country %in% marriage_divorce$Country & 
+           Year %in% marriage_divorce$Year)
 
 filtered_life <- life_data |> 
-  filter(Country %in% marriage_divorce$Country & Year %in% marriage_divorce$Year)
+  filter(Country %in% marriage_divorce$Country & 
+           Year %in% marriage_divorce$Year)
 
 final_data <- marriage_divorce |>
   left_join(filtered_education, by = c("Country", "Code", "Year")) |>

@@ -15,7 +15,8 @@ suppressPackageStartupMessages(library(jsonlite))
 
 ## Global Fertility Trends: A 50-Year View (1970–2020)
 ```{r}
-fertility_rate<- read_csv("data_clean/fertility_long.csv", show_col_types = FALSE)
+fertility_rate<- read_csv("data_clean/fertility_long.csv", 
+                          show_col_types = FALSE)
 marriage_rate <- read_csv("data_raw/marriage-rate-per-1000-inhabitants.csv",
                           show_col_types = FALSE)
 ```
@@ -207,16 +208,20 @@ names(marriage_divorce)[4] <- "MarriageRate"
 names(marriage_divorce)[5] <- "DivorceRate"
 
 filtered_education <- education_data |> 
-  filter(Country %in% marriage_divorce$Country & Year %in% marriage_divorce$Year)
+  filter(Country %in% marriage_divorce$Country & 
+           Year %in% marriage_divorce$Year)
 
 filtered_fertility <- fertility_data |> 
-  filter(Country %in% marriage_divorce$Country & Year %in% marriage_divorce$Year)
+  filter(Country %in% marriage_divorce$Country & 
+           Year %in% marriage_divorce$Year)
 
 filtered_gdp <- gdp_data |> 
-  filter(Country %in% marriage_divorce$Country & Year %in% marriage_divorce$Year)
+  filter(Country %in% marriage_divorce$Country & 
+           Year %in% marriage_divorce$Year)
 
 filtered_life <- life_data |> 
-  filter(Country %in% marriage_divorce$Country & Year %in% marriage_divorce$Year)
+  filter(Country %in% marriage_divorce$Country & 
+           Year %in% marriage_divorce$Year)
 
 final_data <- marriage_divorce |>
   left_join(filtered_education, by = c("Country", "Code", "Year")) |>
@@ -250,7 +255,7 @@ ggplot(final_data, aes(x = fertility_rate, fill = GDP_Group)) +
     axis.text = element_text(size = 10)
   )
 ```
-The above plot is a density plot comparing the distribution of fertility rates for countries grouped by GDP level (High GDP vs. Low GDP) where we calculated by comparing each GDP growth with median value. Both groups have peak around 1.5-2.5, though the low GDP countries show a slightly higher density at this point, meaning that there is a substantial number of countries, regardless of GDP level, within this fertility rate range. Low GDP countries show a notable secondary peak around a fertility rate of 1.2-1.3, which isn't present in high GDP countries. High GDP countries have more spread in the 2.5-3.5 fertility rate range. Both distributions have long "tails" extending toward higher fertility rates though these become quite sparse. Overall, the distributions suggest that while there is significant overlap between high and low GDP countries, there are some distinct patterns in fertility rates associated with economic development.
+The density plot compares fertility rates between high and low GDP countries, with both groups showing a primary peak in the 1.5-2.5 range, though low GDP countries have slightly higher density there. Low GDP countries display a unique secondary peak around 1.2-1.3 that isn't seen in high GDP countries. High GDP countries show more spread in the 2.5-3.5 fertility rate range. Both distributions have long but sparse tails extending toward higher fertility rates. While there is significant overlap between the groups, the distributions reveal distinct fertility patterns associated with economic development levels.
 
 ## The Relationship Between Education Levels and Fertility Rates
 ```{r}
@@ -295,9 +300,13 @@ data_combined <- left_join(data_combined, fertility_country,
 scaled_data <- data_combined
 
 
-scaled_data$fertility_rate <- (scaled_data$fertility_rate - min(scaled_data$fertility_rate)) / (max(scaled_data$fertility_rate) - min(scaled_data$fertility_rate))
+scaled_data$fertility_rate <- (scaled_data$fertility_rate - 
+                                 min(scaled_data$fertility_rate)) / 
+  (max(scaled_data$fertility_rate) - min(scaled_data$fertility_rate))
 
-scaled_data$percentage <- (scaled_data$percentage - min(scaled_data$percentage)) / (max(scaled_data$percentage) - min(scaled_data$percentage))
+scaled_data$percentage <- (scaled_data$percentage - 
+                             min(scaled_data$percentage)) / 
+  (max(scaled_data$percentage) - min(scaled_data$percentage))
 ```
 
 ```{r}
@@ -346,9 +355,13 @@ life_fertility <- fertility_country |>
 
 scaled_life <- life_fertility
 
-scaled_life$fertility_rate <- (scaled_life$fertility_rate - min(scaled_life$fertility_rate)) / (max(scaled_life$fertility_rate) - min(scaled_life$fertility_rate))
+scaled_life$fertility_rate <- (scaled_life$fertility_rate - 
+                                 min(scaled_life$fertility_rate)) / 
+  (max(scaled_life$fertility_rate) - min(scaled_life$fertility_rate))
 
-scaled_life$life_expectancy <- (scaled_life$life_expectancy - min(scaled_life$life_expectancy)) / (max(scaled_life$life_expectancy) - min(scaled_life$life_expectancy))
+scaled_life$life_expectancy <- (scaled_life$life_expectancy - 
+                                  min(scaled_life$life_expectancy)) / 
+  (max(scaled_life$life_expectancy) - min(scaled_life$life_expectancy))
 
 scaled_life_10 <- scaled_life |>
   filter(Year %in% seq(from = 1960, to = 2020, by = 10))
@@ -388,7 +401,8 @@ filtered_data <- final_data %>%
 # Line plot
 ggplot(filtered_data, aes(x = Year)) +
   geom_line(aes(y = MarriageRate, color = "Marriage Rate"), size = 1) +
-  geom_line(aes(y = fertility_rate, color = "Fertility Rate"), size = 1, linetype = "dashed") +
+  geom_line(aes(y = fertility_rate, color = "Fertility Rate"), 
+            size = 1, linetype = "dashed") +
   facet_wrap(~ Country, scales = "free_y") +
   labs(
     title = "Marriage Rate and Fertility Rate Trends by Country",
@@ -403,7 +417,7 @@ ggplot(filtered_data, aes(x = Year)) +
     strip.text = element_text(size = 10, face = "bold")
   )
 ```
-Argentina, Australia, Bolivia, Mexico, Peru, Singapore and Chile have experienced gradual declines in marriage rates. In other countries, such as Ireland and the United Kingdom, marriage rates fluctuated before declining. Countries such as Mexico and Peru started with high fertility rates but then experienced sharp declines. Countries such as Norway and Singapore experienced relatively small declines in fertility and nuptiality. Marriage rates have remained relatively stable compared with fertility in many countries. Countries such as Singapore and the United States show clear trends, with marriage rates stabilizing at lower levels. Taken together, both the marriage rate and the fertility rate show a downward trend in different countries, and in some countries (Ireland, United Kingdom), the marriage rate and the fertility rate seem to be correlated because the trends and shapes of the two lines are similar.
+Marriage rates have declined gradually in several countries including Argentina, Australia, Bolivia, Mexico, Peru, Singapore and Chile, while showing fluctuations before declining in Ireland and the United Kingdom. Countries like Mexico and Peru initially had high fertility rates followed by sharp decreases, while Norway and Singapore saw smaller declines in both fertility and marriage rates. Marriage rates have generally remained more stable than fertility rates across many countries. Some nations like Singapore and the United States show clear trends with marriage rates stabilizing at lower levels. Both marriage and fertility rates demonstrate an overall downward trend, with some countries like Ireland and the United Kingdom showing correlation between the two measures.
 
 ## Marriage and Longevity: Rising Life Expectancy, Declining Marriage Rates
 ```{r}
@@ -417,15 +431,23 @@ life_marriage_scaled <- life_marriage
 
 life_marriage_scaled <- na.omit(life_marriage_scaled)
 
-life_marriage_scaled$marriage_rate <- (life_marriage_scaled$marriage_rate - min(life_marriage_scaled$marriage_rate)) / (max(life_marriage_scaled$marriage_rate) - min(life_marriage_scaled$marriage_rate))
+life_marriage_scaled$marriage_rate <- 
+  (life_marriage_scaled$marriage_rate - 
+     min(life_marriage_scaled$marriage_rate)) / 
+  (max(life_marriage_scaled$marriage_rate) - 
+     min(life_marriage_scaled$marriage_rate))
 
-life_marriage_scaled$life_expectancy <- (life_marriage_scaled$life_expectancy - min(life_marriage_scaled$life_expectancy)) / (max(life_marriage_scaled$life_expectancy) - min(life_marriage_scaled$life_expectancy))
+life_marriage_scaled$life_expectancy <- 
+  (life_marriage_scaled$life_expectancy - 
+     min(life_marriage_scaled$life_expectancy)) / 
+  (max(life_marriage_scaled$life_expectancy) - 
+     min(life_marriage_scaled$life_expectancy))
 ```
 
 
 ```{r}
 ggplot(life_marriage_scaled, aes(x = Year)) +
-  geom_line(aes(y = marriage_rate, color = "Marriage Rate")) +  # Fertility Rate points
+  geom_line(aes(y = marriage_rate, color = "Marriage Rate")) +
   geom_line(aes(y = life_expectancy, color = "Life Expectancy")) +
   facet_wrap(~Country) +
   scale_color_manual(
@@ -459,7 +481,7 @@ ggplot(final_data, aes(x = MarriageRate, y = DivorceRate)) +
     plot.title = element_text(hjust = 0.5, face = "bold")
   )
 ```
-This scatterplot shows the relationship between marriage rates (x-axis) and divorce rates (y-axis) with each blue dot representing a data point. There's a positive correlation between marriage and divorce rates, as shown by the red trend line with its gray confidence interval band. Marriage rates range from about 2 to 10, while divorce rates range from 0 to about 5. The data points show considerable spread around the trend line, suggesting that while there is a correlation, it's not a perfect relationship. There appears to be more variability in divorce rates when marriage rates are between 4-6, creating a wider "band" of points in this region. At higher marriage rates (8-10), the data points seem to follow the trend line more closely, though there are some notable outliers, particularly at the highest marriage rates where some points show significantly lower divorce rates than the trend would predict.
+The scatterplot illustrates the relationship between marriage rates (x-axis) and divorce rates (y-axis), with each blue dot representing a data point and a red trend line showing a positive correlation. Marriage rates span from 2 to 10, while divorce rates range from 0 to 5, with the data points showing notable spread around the trend line. There's greater variability in divorce rates when marriage rates are between 4-6, creating a wider band of points in this region. At higher marriage rates (8-10), the points align more closely with the trend line, though some outliers exist. The relationship suggests that while higher marriage rates generally correspond to higher divorce rates, the correlation isn't perfect, particularly at the extremes of the marriage rate range.
 
 
 
@@ -476,9 +498,13 @@ plot_data <- final_data %>%
   ungroup()
 
 ggplot(plot_data) +
-  geom_bar(aes(x = Year, y = Avg_GDP, fill = "GDP"), stat = "identity", alpha = 0.6) +
-  geom_line(aes(x = Year, y = Avg_MarriageRate, color = "Average Marriage Rate"), size = 1) +
-  geom_line(aes(x = Year, y = Avg_DivorceRate, color = "Average Divorce Rate"), size = 1, linetype = "dashed") +
+  geom_bar(aes(x = Year, y = Avg_GDP, fill = "GDP"), 
+           stat = "identity", alpha = 0.6) +
+  geom_line(aes(x = Year, y = Avg_MarriageRate, 
+                color = "Average Marriage Rate"), size = 1) +
+  geom_line(aes(x = Year, y = Avg_DivorceRate, 
+                color = "Average Divorce Rate"), 
+            size = 1, linetype = "dashed") +
   labs(
     title = "GDP, Average Marriage Rate and Divorce Rate Over Time",
     x = "Year",
@@ -531,4 +557,4 @@ cor_long_for_d3 <- cor_long
 cor_long_for_d3$Correlation <- round(cor_long_for_d3$Correlation, 3)
 write_json(cor_long_for_d3, "correlation_data.json")
 ```
-The above correlation matrix heatmap help visualize the pairwise correlations between different numeric variables. Marriage Rate and Divorce Rate are highly positively correlated, indicating that higher marriage rates are associated with higher divorce rates. Marriage Rate and fertility rate also has high correlation. Fertility rate is negatively correlated with Year, which aligns with global trends where fertility rates decrease with higher education and over time. It is surprising that the fertility rate is negatively correlated with life expectancy. GDP growth has weaker correlations with most variables, suggesting it does not strongly align with the other variables in this data set. This heatmap provides a useful overview for identifying patterns and relationships within the data.
+The correlation matrix heatmap reveals a strong positive correlation between Marriage Rate and Divorce Rate, as well as between Marriage Rate and fertility rate. Fertility rate shows a negative correlation with Year, reflecting the global trend of decreasing fertility rates over time. There's an unexpected negative correlation between fertility rate and life expectancy. GDP growth shows weak correlations with most variables, indicating it may be less connected to demographic trends in this dataset.
