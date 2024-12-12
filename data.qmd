@@ -18,6 +18,7 @@ https://datacatalog.worldbank.org/search/dataset/0037712/World-Development-Indic
 
 ## Missing value analysis
 ```{r}
+##install.packages("naniar")
 library(tidyr)
 library(dplyr)
 library(ggplot2)

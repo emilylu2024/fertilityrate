@@ -220,9 +220,10 @@
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fertility_rate<span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data_clean/fertility_long.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>marriage_rate <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data_raw/marriage-rate-per-1000-inhabitants.csv"</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fertility_rate<span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data_clean/fertility_long.csv"</span>, </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>marriage_rate <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data_raw/marriage-rate-per-1000-inhabitants.csv"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -356,7 +357,7 @@
 <p><img src="results_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>This visualization above illustrates the global trend of fertility rate from 1970 to 2020. It appears that regions with higher fertility rates, colored in blue in the graph, have diminished over the decades. On the other hand, areas with a lower fertility rate, colored in red, have increased significantly over the decades, expanding across Europe, the Americas, and parts of Asia. This trend reflects a global shift toward a lower fertility rate, which might be driven by improvements in education, healthcare, and economics.</p>
+<p>This visualization above illustrates the global trend of fertility rate from 1970 to 2020. It appears that regions with higher fertility rates (colored in blue) have diminished over the decades. On the other hand, areas with a lower fertility rate (colored in red) have increased significantly over the decades, expanding across Europe, the Americas, and parts of Asia. This trend reflects a global shift toward a lower fertility rate, which might be driven by improvements in education, healthcare, and economics.</p>
 <p>The shape file used to make this graph is obtained from the link shown below: https://www.geoboundaries.org/globalDownloads.html</p>
 </section>
 <section id="how-fertility-rates-and-gdp-growth-have-evolved-globally-over-time" class="level2" data-number="3.2">
@@ -411,7 +412,7 @@
 <p><img src="results_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>This graph highlights the relationship between the average fertility rates (blue line) and the average GDP growth rate(red line) across the globe from 1960 to 2020. The y-axis displays the scaled value for these two variables because of the differences in their measuring units. Over the decades, fertility rates have shown a consistent declining trend, reflecting a shift towards a lower level of offspring. On the other hand, GDP growth has fluctuated over the years, revealing periods of economic growth and recessions, with two noticeable drops around 2010 and 2020, when global crises like the Great Recession and the COVID-19 pandemic happened. The steady decline in fertility rates with the fluctuation shown in GDP growth rate indicates that the changes in fertility rate are independent of the variations in the country’s economic health.</p>
+<p>This graph highlights the relationship between the average fertility rates (blue line) and the average GDP growth rate (red line) across the globe from 1960 to 2020. The y-axis displays the scaled value for these two variables because of the differences in their measuring units. Over the decades, fertility rates have shown a consistent declining trend. On the other hand, GDP growth has fluctuated over the years, revealing periods of economic growth and recessions, with two noticeable drops around 2010 and 2020, when global crises like the Great Recession and the COVID-19 pandemic happened. The steady decline in fertility rates with the fluctuation shown in GDP growth rate indicates that the changes in fertility rate are independent of the variations in the country’s economic health.</p>
 </section>
 <section id="fertility-rate-density-plot-by-high-vs-low-gdp-countries" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="fertility-rate-density-plot-by-high-vs-low-gdp-countries"><span class="header-section-number">3.3</span> Fertility Rate Density Plot by High vs Low GDP Countries</h2>
@@ -436,24 +437,28 @@
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(marriage_divorce)[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="st">"DivorceRate"</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>filtered_education <span class="ot">&lt;-</span> education_data <span class="sc">|&gt;</span> </span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Country <span class="sc">%in%</span> marriage_divorce<span class="sc">$</span>Country <span class="sc">&amp;</span> Year <span class="sc">%in%</span> marriage_divorce<span class="sc">$</span>Year)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>filtered_fertility <span class="ot">&lt;-</span> fertility_data <span class="sc">|&gt;</span> </span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Country <span class="sc">%in%</span> marriage_divorce<span class="sc">$</span>Country <span class="sc">&amp;</span> Year <span class="sc">%in%</span> marriage_divorce<span class="sc">$</span>Year)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>filtered_gdp <span class="ot">&lt;-</span> gdp_data <span class="sc">|&gt;</span> </span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Country <span class="sc">%in%</span> marriage_divorce<span class="sc">$</span>Country <span class="sc">&amp;</span> Year <span class="sc">%in%</span> marriage_divorce<span class="sc">$</span>Year)</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>filtered_life <span class="ot">&lt;-</span> life_data <span class="sc">|&gt;</span> </span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Country <span class="sc">%in%</span> marriage_divorce<span class="sc">$</span>Country <span class="sc">&amp;</span> Year <span class="sc">%in%</span> marriage_divorce<span class="sc">$</span>Year)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Country <span class="sc">%in%</span> marriage_divorce<span class="sc">$</span>Country <span class="sc">&amp;</span> </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>           Year <span class="sc">%in%</span> marriage_divorce<span class="sc">$</span>Year)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>filtered_fertility <span class="ot">&lt;-</span> fertility_data <span class="sc">|&gt;</span> </span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Country <span class="sc">%in%</span> marriage_divorce<span class="sc">$</span>Country <span class="sc">&amp;</span> </span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>           Year <span class="sc">%in%</span> marriage_divorce<span class="sc">$</span>Year)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>filtered_gdp <span class="ot">&lt;-</span> gdp_data <span class="sc">|&gt;</span> </span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Country <span class="sc">%in%</span> marriage_divorce<span class="sc">$</span>Country <span class="sc">&amp;</span> </span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>           Year <span class="sc">%in%</span> marriage_divorce<span class="sc">$</span>Year)</span>
 <span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>final_data <span class="ot">&lt;-</span> marriage_divorce <span class="sc">|&gt;</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(filtered_education, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Country"</span>, <span class="st">"Code"</span>, <span class="st">"Year"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(filtered_fertility, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Country"</span>, <span class="st">"Code"</span>, <span class="st">"Year"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(filtered_gdp, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Country"</span>, <span class="st">"Code"</span>, <span class="st">"Year"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(filtered_life, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Country"</span>, <span class="st">"Code"</span>, <span class="st">"Year"</span>))</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="do">##colSums(is.na(final_data))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>filtered_life <span class="ot">&lt;-</span> life_data <span class="sc">|&gt;</span> </span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Country <span class="sc">%in%</span> marriage_divorce<span class="sc">$</span>Country <span class="sc">&amp;</span> </span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>           Year <span class="sc">%in%</span> marriage_divorce<span class="sc">$</span>Year)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>final_data <span class="ot">&lt;-</span> marriage_divorce <span class="sc">|&gt;</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(filtered_education, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Country"</span>, <span class="st">"Code"</span>, <span class="st">"Year"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(filtered_fertility, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Country"</span>, <span class="st">"Code"</span>, <span class="st">"Year"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(filtered_gdp, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Country"</span>, <span class="st">"Code"</span>, <span class="st">"Year"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(filtered_life, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Country"</span>, <span class="st">"Code"</span>, <span class="st">"Year"</span>))</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="do">##colSums(is.na(final_data))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -485,7 +490,7 @@
 <p><img src="results_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>The above plot is a density plot comparing the distribution of fertility rates for countries grouped by GDP level (High GDP vs.&nbsp;Low GDP) where we calculated by comparing each GDP growth with median value. Both groups have peak around 1.5-2.5, though the low GDP countries show a slightly higher density at this point, meaning that there is a substantial number of countries, regardless of GDP level, within this fertility rate range. Low GDP countries show a notable secondary peak around a fertility rate of 1.2-1.3, which isn’t present in high GDP countries. High GDP countries have more spread in the 2.5-3.5 fertility rate range. Both distributions have long “tails” extending toward higher fertility rates though these become quite sparse. Overall, the distributions suggest that while there is significant overlap between high and low GDP countries, there are some distinct patterns in fertility rates associated with economic development.</p>
+<p>The density plot compares fertility rates between high and low GDP countries, with both groups showing a primary peak in the 1.5-2.5 range, though low GDP countries have slightly higher density there. Low GDP countries display a unique secondary peak around 1.2-1.3 that isn’t seen in high GDP countries. High GDP countries show more spread in the 2.5-3.5 fertility rate range. Both distributions have long but sparse tails extending toward higher fertility rates. While there is significant overlap between the groups, the distributions reveal distinct fertility patterns associated with economic development levels.</p>
 </section>
 <section id="the-relationship-between-education-levels-and-fertility-rates" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="the-relationship-between-education-levels-and-fertility-rates"><span class="header-section-number">3.4</span> The Relationship Between Education Levels and Fertility Rates</h2>
@@ -535,9 +540,13 @@
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>scaled_data <span class="ot">&lt;-</span> data_combined</span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>scaled_data<span class="sc">$</span>fertility_rate <span class="ot">&lt;-</span> (scaled_data<span class="sc">$</span>fertility_rate <span class="sc">-</span> <span class="fu">min</span>(scaled_data<span class="sc">$</span>fertility_rate)) <span class="sc">/</span> (<span class="fu">max</span>(scaled_data<span class="sc">$</span>fertility_rate) <span class="sc">-</span> <span class="fu">min</span>(scaled_data<span class="sc">$</span>fertility_rate))</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>scaled_data<span class="sc">$</span>percentage <span class="ot">&lt;-</span> (scaled_data<span class="sc">$</span>percentage <span class="sc">-</span> <span class="fu">min</span>(scaled_data<span class="sc">$</span>percentage)) <span class="sc">/</span> (<span class="fu">max</span>(scaled_data<span class="sc">$</span>percentage) <span class="sc">-</span> <span class="fu">min</span>(scaled_data<span class="sc">$</span>percentage))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>scaled_data<span class="sc">$</span>fertility_rate <span class="ot">&lt;-</span> (scaled_data<span class="sc">$</span>fertility_rate <span class="sc">-</span> </span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">min</span>(scaled_data<span class="sc">$</span>fertility_rate)) <span class="sc">/</span> </span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">max</span>(scaled_data<span class="sc">$</span>fertility_rate) <span class="sc">-</span> <span class="fu">min</span>(scaled_data<span class="sc">$</span>fertility_rate))</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>scaled_data<span class="sc">$</span>percentage <span class="ot">&lt;-</span> (scaled_data<span class="sc">$</span>percentage <span class="sc">-</span> </span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">min</span>(scaled_data<span class="sc">$</span>percentage)) <span class="sc">/</span> </span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">max</span>(scaled_data<span class="sc">$</span>percentage) <span class="sc">-</span> <span class="fu">min</span>(scaled_data<span class="sc">$</span>percentage))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -577,7 +586,7 @@
 <p><img src="results_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>The graph explores the relationship between fertility rates and educational attainment, represented by the black lines and blue bars in the graph, respectively. The fertility rate is measured by the number of children per woman, but educational attainment is measured in the percentage of people with a bachelor’s degree or higher. Due to the difference in the units of these two metrics, their values are scaled to ensure comparability. The scaled value is displayed on the y-axis and ranges from 0 to 1. The countries shown in the graph are chosen from multiple continents, including Europe, the Americas, and Asia-Pacific, to offer a global insight into trends. For these countries, the visualization demonstrates that fertility rates decrease as educational attainment increases from 2014 to 2022. This finding suggests that the global decrease in fertility rate might be associated with higher education levels developed in recent years.</p>
+<p>The graph explores the relationship between fertility rates and educational attainment, represented by the black lines and blue bars, respectively. The values displayed on the y-axis are scaled to ensure comparability. The countries shown in the graph are chosen from multiple continents, including Europe, the Americas, and Asia-Pacific, to offer a global insight into trends. For these countries, the visualization demonstrates that fertility rates decrease as educational attainment increases from 2014 to 2022. This finding suggests that the global decrease in fertility rate might be associated with the elevation in education levels in recent years.</p>
 </section>
 <section id="tracking-fertility-rate-and-life-expectancy-trends-across-decades" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="tracking-fertility-rate-and-life-expectancy-trends-across-decades"><span class="header-section-number">3.5</span> Tracking Fertility Rate and Life Expectancy Trends Across Decades</h2>
@@ -593,12 +602,16 @@
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>scaled_life <span class="ot">&lt;-</span> life_fertility</span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>scaled_life<span class="sc">$</span>fertility_rate <span class="ot">&lt;-</span> (scaled_life<span class="sc">$</span>fertility_rate <span class="sc">-</span> <span class="fu">min</span>(scaled_life<span class="sc">$</span>fertility_rate)) <span class="sc">/</span> (<span class="fu">max</span>(scaled_life<span class="sc">$</span>fertility_rate) <span class="sc">-</span> <span class="fu">min</span>(scaled_life<span class="sc">$</span>fertility_rate))</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>scaled_life<span class="sc">$</span>life_expectancy <span class="ot">&lt;-</span> (scaled_life<span class="sc">$</span>life_expectancy <span class="sc">-</span> <span class="fu">min</span>(scaled_life<span class="sc">$</span>life_expectancy)) <span class="sc">/</span> (<span class="fu">max</span>(scaled_life<span class="sc">$</span>life_expectancy) <span class="sc">-</span> <span class="fu">min</span>(scaled_life<span class="sc">$</span>life_expectancy))</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>scaled_life<span class="sc">$</span>fertility_rate <span class="ot">&lt;-</span> (scaled_life<span class="sc">$</span>fertility_rate <span class="sc">-</span> </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">min</span>(scaled_life<span class="sc">$</span>fertility_rate)) <span class="sc">/</span> </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">max</span>(scaled_life<span class="sc">$</span>fertility_rate) <span class="sc">-</span> <span class="fu">min</span>(scaled_life<span class="sc">$</span>fertility_rate))</span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>scaled_life_10 <span class="ot">&lt;-</span> scaled_life <span class="sc">|&gt;</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">%in%</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1960</span>, <span class="at">to =</span> <span class="dv">2020</span>, <span class="at">by =</span> <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>scaled_life<span class="sc">$</span>life_expectancy <span class="ot">&lt;-</span> (scaled_life<span class="sc">$</span>life_expectancy <span class="sc">-</span> </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">min</span>(scaled_life<span class="sc">$</span>life_expectancy)) <span class="sc">/</span> </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">max</span>(scaled_life<span class="sc">$</span>life_expectancy) <span class="sc">-</span> <span class="fu">min</span>(scaled_life<span class="sc">$</span>life_expectancy))</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>scaled_life_10 <span class="ot">&lt;-</span> scaled_life <span class="sc">|&gt;</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">%in%</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1960</span>, <span class="at">to =</span> <span class="dv">2020</span>, <span class="at">by =</span> <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -630,7 +643,7 @@
 <p><img src="results_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>This visualization shows the changes in fertility rates (blue dots) and life expectancy (red dots and measured in years) for various countries from 1960 to 2020. The values for these two variables are scaled as well due to the differences in their measuring units. The countries are the same as in the last graph, except for the addition of Peru, which is absent from the previous graph due to the lack of data. The graph displays a steadily increasing trend for life expectancy as fertility rates decrease over the years. Despite the regional differences in the changing rate, the opposing pattern shown in the graph suggests that improvement in healthcare might be associated negatively with the fertility rate, resulting in a reduction in family size.</p>
+<p>This visualization shows the changes in fertility rates (blue dots) and life expectancy (red dots) for various countries from 1960 to 2020. The values are scaled for comparion. Countries included in this graph is the same as the last one except for the addition of Peru, which is absent from the previous graph due to the lack of data. The graph displays a steadily increasing trend for life expectancy as fertility rates decrease over the years. Despite the regional differences in the changing rate, the opposing pattern shown in the graph suggests that improvement in healthcare might be negatively associated with the fertility rate.</p>
 </section>
 <section id="the-relationship-between-marriage-rate-and-fertility-rate" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="the-relationship-between-marriage-rate-and-fertility-rate"><span class="header-section-number">3.6</span> The Relationship between Marriage Rate and Fertility Rate</h2>
@@ -643,26 +656,27 @@
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Line plot</span></span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(filtered_data, <span class="fu">aes</span>(<span class="at">x =</span> Year)) <span class="sc">+</span></span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> MarriageRate, <span class="at">color =</span> <span class="st">"Marriage Rate"</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> fertility_rate, <span class="at">color =</span> <span class="st">"Fertility Rate"</span>), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Country, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Marriage Rate and Fertility Rate Trends by Country"</span>,</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Rate"</span>,</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Variable"</span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">face =</span> <span class="st">"bold"</span>)</span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> fertility_rate, <span class="at">color =</span> <span class="st">"Fertility Rate"</span>), </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Country, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Marriage Rate and Fertility Rate Trends by Country"</span>,</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Rate"</span>,</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Variable"</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">face =</span> <span class="st">"bold"</span>)</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="results_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Argentina, Australia, Bolivia, Mexico, Peru, Singapore and Chile have experienced gradual declines in marriage rates. In other countries, such as Ireland and the United Kingdom, marriage rates fluctuated before declining. Countries such as Mexico and Peru started with high fertility rates but then experienced sharp declines. Countries such as Norway and Singapore experienced relatively small declines in fertility and nuptiality. Marriage rates have remained relatively stable compared with fertility in many countries. Countries such as Singapore and the United States show clear trends, with marriage rates stabilizing at lower levels. Taken together, both the marriage rate and the fertility rate show a downward trend in different countries, and in some countries (Ireland, United Kingdom), the marriage rate and the fertility rate seem to be correlated because the trends and shapes of the two lines are similar.</p>
+<p>Marriage rates have declined gradually in several countries including Argentina, Australia, Bolivia, Mexico, Peru, Singapore and Chile, while showing fluctuations before declining in Ireland and the United Kingdom. Countries like Mexico and Peru initially had high fertility rates followed by sharp decreases, while Norway and Singapore saw smaller declines in both fertility and marriage rates. Marriage rates have generally remained more stable than fertility rates across many countries. Some nations like Singapore and the United States show clear trends with marriage rates stabilizing at lower levels. Both marriage and fertility rates demonstrate an overall downward trend, with some countries like Ireland and the United Kingdom showing correlation between the two measures.</p>
 </section>
 <section id="marriage-and-longevity-rising-life-expectancy-declining-marriage-rates" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="marriage-and-longevity-rising-life-expectancy-declining-marriage-rates"><span class="header-section-number">3.7</span> Marriage and Longevity: Rising Life Expectancy, Declining Marriage Rates</h2>
@@ -679,16 +693,24 @@
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>life_marriage_scaled <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(life_marriage_scaled)</span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>life_marriage_scaled<span class="sc">$</span>marriage_rate <span class="ot">&lt;-</span> (life_marriage_scaled<span class="sc">$</span>marriage_rate <span class="sc">-</span> <span class="fu">min</span>(life_marriage_scaled<span class="sc">$</span>marriage_rate)) <span class="sc">/</span> (<span class="fu">max</span>(life_marriage_scaled<span class="sc">$</span>marriage_rate) <span class="sc">-</span> <span class="fu">min</span>(life_marriage_scaled<span class="sc">$</span>marriage_rate))</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>life_marriage_scaled<span class="sc">$</span>life_expectancy <span class="ot">&lt;-</span> (life_marriage_scaled<span class="sc">$</span>life_expectancy <span class="sc">-</span> <span class="fu">min</span>(life_marriage_scaled<span class="sc">$</span>life_expectancy)) <span class="sc">/</span> (<span class="fu">max</span>(life_marriage_scaled<span class="sc">$</span>life_expectancy) <span class="sc">-</span> <span class="fu">min</span>(life_marriage_scaled<span class="sc">$</span>life_expectancy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>life_marriage_scaled<span class="sc">$</span>marriage_rate <span class="ot">&lt;-</span> </span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  (life_marriage_scaled<span class="sc">$</span>marriage_rate <span class="sc">-</span> </span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>     <span class="fu">min</span>(life_marriage_scaled<span class="sc">$</span>marriage_rate)) <span class="sc">/</span> </span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">max</span>(life_marriage_scaled<span class="sc">$</span>marriage_rate) <span class="sc">-</span> </span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>     <span class="fu">min</span>(life_marriage_scaled<span class="sc">$</span>marriage_rate))</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>life_marriage_scaled<span class="sc">$</span>life_expectancy <span class="ot">&lt;-</span> </span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  (life_marriage_scaled<span class="sc">$</span>life_expectancy <span class="sc">-</span> </span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>     <span class="fu">min</span>(life_marriage_scaled<span class="sc">$</span>life_expectancy)) <span class="sc">/</span> </span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">max</span>(life_marriage_scaled<span class="sc">$</span>life_expectancy) <span class="sc">-</span> </span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>     <span class="fu">min</span>(life_marriage_scaled<span class="sc">$</span>life_expectancy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(life_marriage_scaled, <span class="fu">aes</span>(<span class="at">x =</span> Year)) <span class="sc">+</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> marriage_rate, <span class="at">color =</span> <span class="st">"Marriage Rate"</span>)) <span class="sc">+</span>  <span class="co"># Fertility Rate points</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> marriage_rate, <span class="at">color =</span> <span class="st">"Marriage Rate"</span>)) <span class="sc">+</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> life_expectancy, <span class="at">color =</span> <span class="st">"Life Expectancy"</span>)) <span class="sc">+</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Country) <span class="sc">+</span></span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
@@ -708,7 +730,7 @@
 <p><img src="results_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>This graph follows the previous exploration of fertility and marriage rates, which showed a positive association between the two metrics. Considering a previous graph demonstrates a negative association between life expectancy and fertility rate, this graph examines the relationship between marriage rates and life expectancy from 1960 to 2020 across different countries. The values of both variables are scaled due to differences in measuring units. While the visualization exhibits a steady trend of increasing life expectancy, marriage rates have been consistently decreasing in most countries. The trend observed here uncovers a global trend of people living longer lives but marrying less often, which could be one of the factors influencing family structures and leading to changes in the fertility rate. While the overall trend is global, the rate and the extent of changes remain regional, which could be influenced by other factors, like economic growth.</p>
+<p>This graph provides a further investigation on the previous exploration of fertility and marriage rates. Since in previous exploration, we found a negative association between life expectancy and fertility rate, this graph is made to examine the relationship between marriage rates and life expectancy from 1960 to 2020. The values of both variables are scaled to avoid bias in comparison. While the visualization exhibits a steady trend of increasing life expectancy, marriage rates have been consistently decreasing across the years. Despite the rate and the extent of changes vary by country, the overall trend is shared globally, which could be one of the factors influencing family structures and leading to changes in the fertility rate.</p>
 </section>
 <section id="the-relationship-between-marriage-rate-and-divorce-rate" class="level2" data-number="3.8">
 <h2 data-number="3.8" class="anchored" data-anchor-id="the-relationship-between-marriage-rate-and-divorce-rate"><span class="header-section-number">3.8</span> The Relationship between Marriage Rate and Divorce Rate</h2>
@@ -735,7 +757,7 @@
 <p><img src="results_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>This scatterplot shows the relationship between marriage rates (x-axis) and divorce rates (y-axis) with each blue dot representing a data point. There’s a positive correlation between marriage and divorce rates, as shown by the red trend line with its gray confidence interval band. Marriage rates range from about 2 to 10, while divorce rates range from 0 to about 5. The data points show considerable spread around the trend line, suggesting that while there is a correlation, it’s not a perfect relationship. There appears to be more variability in divorce rates when marriage rates are between 4-6, creating a wider “band” of points in this region. At higher marriage rates (8-10), the data points seem to follow the trend line more closely, though there are some notable outliers, particularly at the highest marriage rates where some points show significantly lower divorce rates than the trend would predict.</p>
+<p>The scatterplot illustrates the relationship between marriage rates (x-axis) and divorce rates (y-axis), with each blue dot representing a data point and a red trend line showing a positive correlation. Marriage rates span from 2 to 10, while divorce rates range from 0 to 5, with the data points showing notable spread around the trend line. There’s greater variability in divorce rates when marriage rates are between 4-6, creating a wider band of points in this region. At higher marriage rates (8-10), the points align more closely with the trend line, though some outliers exist. The relationship suggests that while higher marriage rates generally correspond to higher divorce rates, the correlation isn’t perfect, particularly at the extremes of the marriage rate range.</p>
 </section>
 <section id="global-trend-focusing-on-gdp-marriage-rate-and-divorce-rate" class="level2" data-number="3.9">
 <h2 data-number="3.9" class="anchored" data-anchor-id="global-trend-focusing-on-gdp-marriage-rate-and-divorce-rate"><span class="header-section-number">3.9</span> Global Trend Focusing on GDP, Marriage Rate and Divorce Rate</h2>
@@ -752,26 +774,30 @@
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot_data) <span class="sc">+</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Avg_GDP, <span class="at">fill =</span> <span class="st">"GDP"</span>), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Avg_MarriageRate, <span class="at">color =</span> <span class="st">"Average Marriage Rate"</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Avg_DivorceRate, <span class="at">color =</span> <span class="st">"Average Divorce Rate"</span>), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"GDP, Average Marriage Rate and Divorce Rate Over Time"</span>,</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Values"</span>,</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Variable"</span>,</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Rate Type"</span></span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"GDP"</span> <span class="ot">=</span> <span class="st">"blue"</span>)) <span class="sc">+</span></span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Average Marriage Rate"</span> <span class="ot">=</span> <span class="st">"green"</span>,</span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Average Divorce Rate"</span> <span class="ot">=</span> <span class="st">"red"</span></span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Avg_GDP, <span class="at">fill =</span> <span class="st">"GDP"</span>), </span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Avg_MarriageRate, </span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">color =</span> <span class="st">"Average Marriage Rate"</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Avg_DivorceRate, </span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">color =</span> <span class="st">"Average Divorce Rate"</span>), </span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"GDP, Average Marriage Rate and Divorce Rate Over Time"</span>,</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Values"</span>,</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Variable"</span>,</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Rate Type"</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"GDP"</span> <span class="ot">=</span> <span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Average Marriage Rate"</span> <span class="ot">=</span> <span class="st">"green"</span>,</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Average Divorce Rate"</span> <span class="ot">=</span> <span class="st">"red"</span></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="results_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
@@ -820,7 +846,7 @@
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write_json</span>(cor_long_for_d3, <span class="st">"correlation_data.json"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>The above correlation matrix heatmap help visualize the pairwise correlations between different numeric variables. Marriage Rate and Divorce Rate are highly positively correlated, indicating that higher marriage rates are associated with higher divorce rates. Marriage Rate and fertility rate also has high correlation. Fertility rate is negatively correlated with Year, which aligns with global trends where fertility rates decrease with higher education and over time. It is surprising that the fertility rate is negatively correlated with life expectancy. GDP growth has weaker correlations with most variables, suggesting it does not strongly align with the other variables in this data set. This heatmap provides a useful overview for identifying patterns and relationships within the data.</p>
+<p>The correlation matrix heatmap reveals a strong positive correlation between Marriage Rate and Divorce Rate, as well as between Marriage Rate and fertility rate. Fertility rate shows a negative correlation with Year, reflecting the global trend of decreasing fertility rates over time. There’s an unexpected negative correlation between fertility rate and life expectancy. GDP growth shows weak correlations with most variables, indicating it may be less connected to demographic trends in this dataset.</p>
 
 
 </section>
