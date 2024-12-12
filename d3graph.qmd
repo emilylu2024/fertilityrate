@@ -1,27 +1,47 @@
 # Interactive graph
 
-<style>
-  * {
-    font-family: sans-serif;
-    .tooltip {
-      position: absolute;
-      text-align: center;
-      width: auto;
-      height: auto;
-      padding: 8px;
-      font-size: 12px;
-      background: lightgray;
-      border: 1px solid black;
-      border-radius: 5px;
-      pointer-events: none; /* Important to avoid interfering with mouse events */
-      opacity: 0; /* Hidden by default */
-      transition: opacity 0.2s; /* Smooth transition for visibility */
-  }
-  }
-</style> 
+<html>
+<head>
+  <style>
+    * {
+      font-family: sans-serif;
+    }
+      .tooltip {
+        position: absolute;
+        text-align: center;
+        width: auto;
+        height: auto;
+        padding: 8px;
+        font-size: 12px;
+        color: black; 
+        background: white; 
+        border: 1px solid black; 
+        border-radius: 5px;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.2s; 
+    }
+  </style> 
+</head>
 
-<div id="plot">
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="scripts/myscript.js"></script>
+
+<body>
+  <h4 id="title" style="text-align: center; font-family: sans-serif; margin-top: 10px; margin-bottom: 10px;">
+    Instructions for Using the Interactive Correlation Matrix
+  </h4>
+
+
+  <div id="instructions" style="margin-bottom: 10px; font-family: sans-serif; font-size: 14px;">
+    The correlation matrix below is designed to be interactive to allow users to explore the relationships between different combinations of variables in the dataset. <b>To interact, simply hover over any cell of interest to see the exact correlation value displayed.</b> This interaction allows a more detailed exploration of the correlation between each variable, especially for cells with lighter colors. This function allows users to analyze and distinguish the differences in correlations between variables more accurately and simplistically than using a static graph.
+  </div>
+
+
+
+  <div id="plot">
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="scripts/myscript.js"></script>
+</body>
+</html>
