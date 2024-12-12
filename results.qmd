@@ -10,22 +10,23 @@ suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(rmapshaper))
 suppressPackageStartupMessages(library(RColorBrewer))
 suppressPackageStartupMessages(library(cowplot))
+suppressPackageStartupMessages(library(jsonlite))
 ```
 
 ## Global Fertility Trends: A 50-Year View (1970–2020)
 ```{r}
 fertility_rate<- read_csv("fertility_long.csv", show_col_types = FALSE)
-marriage_rate <- read_csv("marriage-rate-per-1000-inhabitants.csv", 
+marriage_rate <- read_csv("marriage-rate-per-1000-inhabitants.csv",
                           show_col_types = FALSE)
 ```
 
 ```{r}
 clean <- na.omit(fertility_rate)
-min <- min(clean$fertility_rate) 
+min <- min(clean$fertility_rate)
 max <- max(clean$fertility_rate)
 
 shapefile_path <-
-  "/Users/emilyl/Desktop/geoBoundariesCGAZ_ADM0/geoBoundariesCGAZ_ADM0.shp"
+  "/Users/jingjingdong/Desktop/geoBoundariesCGAZ_ADM0/geoBoundariesCGAZ_ADM0.shp"
 regions <- st_read(shapefile_path, quiet = TRUE)
 simplified_shapefile <- ms_simplify(regions)
 
@@ -122,12 +123,12 @@ legend <- get_legend(
 ```
 
 ```{r}
-combined <- plot_grid(p2, p3, p4, 
+combined <- plot_grid(p2, p3, p4,
                       p5, p6, p7,
-                      NULL, legend, 
+                      NULL, legend,
                       ncol = 3,
-                      rel_heights = c(1, 1, 1, 
-                                     1, 1, 1, 
+                      rel_heights = c(1, 1, 1,
+                                     1, 1, 1,
                                      0.1, 0.1,0.1))
 
 title <- ggdraw() +
@@ -155,16 +156,16 @@ gdp_fertility <- gdp_clean |>
 gdp_fertility <- na.omit(gdp_fertility)
 
 gdp_fertility <- gdp_fertility |>
-  group_by(Year) |>        
+  group_by(Year) |>
   summarize(mean_fertility = mean(fertility_rate),
-            mean_gdp = mean(gdp_growth)) 
+            mean_gdp = mean(gdp_growth))
 
 scaled_gdp <- gdp_fertility
-scaled_gdp$mean_fertility <- 
-  (scaled_gdp$mean_fertility - min(scaled_gdp$mean_fertility)) / 
+scaled_gdp$mean_fertility <-
+  (scaled_gdp$mean_fertility - min(scaled_gdp$mean_fertility)) /
   (max(scaled_gdp$mean_fertility) - min(scaled_gdp$mean_fertility))
 
-scaled_gdp$mean_gdp <- (scaled_gdp$mean_gdp - min(scaled_gdp$mean_gdp)) / 
+scaled_gdp$mean_gdp <- (scaled_gdp$mean_gdp - min(scaled_gdp$mean_gdp)) /
   (max(scaled_gdp$mean_gdp) - min(scaled_gdp$mean_gdp))
 ```
 
@@ -172,7 +173,7 @@ scaled_gdp$mean_gdp <- (scaled_gdp$mean_gdp - min(scaled_gdp$mean_gdp)) /
 ggplot(scaled_gdp, aes(x = Year)) +
   geom_line(aes(y = mean_fertility, color = "Fertility Rate")) +
   geom_line(aes(y = mean_gdp, color = "GDP Growth")) +
-  scale_color_manual(values = c("Fertility Rate" = "blue", 
+  scale_color_manual(values = c("Fertility Rate" = "blue",
                                 "GDP Growth" = "red")) +
   labs(
     title = "Global Trends in Fertility Rate and GDP Growth Rate Over Time",
@@ -376,7 +377,7 @@ ggplot(scaled_life_10, aes(y = Code)) +
 
 This visualization shows the changes in fertility rates (blue dots) and life expectancy (red dots and measured in years) for various countries from 1960 to 2020. The values for these two variables are scaled as well due to the differences in their measuring units. The countries are the same as in the last graph, except for the addition of Peru, which is absent from the previous graph due to the lack of data. The graph displays a steadily increasing trend for life expectancy as fertility rates decrease over the years. Despite the regional differences in the changing rate, the opposing pattern shown in the graph suggests that improvement in healthcare might be associated negatively with the fertility rate, resulting in a reduction in family size.
 
-## Marriage Rate and Fertility Rate
+## The Relationship between Marriage Rate and Fertility Rate
 ```{r,warning = FALSE}
 filtered_data <- final_data %>%
   filter(!is.na(MarriageRate) & !is.na(fertility_rate))
@@ -440,11 +441,11 @@ ggplot(life_marriage_scaled, aes(x = Year)) +
 
 This graph follows the previous exploration of fertility and marriage rates, which showed a positive association between the two metrics. Considering a previous graph demonstrates a negative association between life expectancy and fertility rate, this graph examines the relationship between marriage rates and life expectancy from 1960 to 2020 across different countries. The values of both variables are scaled due to differences in measuring units. While the visualization exhibits a steady trend of increasing life expectancy, marriage rates have been consistently decreasing in most countries. The trend observed here uncovers a global trend of people living longer lives but marrying less often, which could be one of the factors influencing family structures and leading to changes in the fertility rate. While the overall trend is global, the rate and the extent of changes remain regional, which could be influenced by other factors, like economic growth.
 
-## Marriage Rate vs Divorce Rate
+## The Relationship between Marriage Rate and Divorce Rate
 ```{r,warning=FALSE}
 ggplot(final_data, aes(x = MarriageRate, y = DivorceRate)) +
   geom_point(alpha = 0.7, color = "blue") +
-  geom_smooth(method = "lm", color = "red", se = TRUE) +  # Add a trend line
+  geom_smooth(method = "lm", color = "red", se = TRUE) +
   labs(
     title = "Marriage Rate vs. Divorce Rate",
     x = "Marriage Rate",
@@ -460,7 +461,7 @@ This scatterplot shows the relationship between marriage rates (x-axis) and divo
 
 
 
-## GDP, Marriage Rate and Divorce Rate
+## Global Trend Focusing on GDP, Marriage Rate and Divorce Rate
 ```{r}
 plot_data <- final_data %>%
   group_by(Year) %>%
@@ -496,7 +497,7 @@ ggplot(plot_data) +
 ```
 This graph illustrates the relationship between GDP, marriage rates, and divorce rates from 1960 to 2020. The marriage rate (green line) shows a clear downward trend over the 60-year period, declining from around 7 to 5, though it spikes sharply upward near 2020. The divorce rate (red dashed line) remains relatively stable between 2-3 throughout the period, showing only minor fluctuations. GDP (blue bars) demonstrates considerable volatility, fluctuating mostly between 0 and 6, with a dramatic drop to negative values around 2015 before recovering. Notably, despite these significant changes in marriage rates and GDP, the divorce rate maintains remarkable stability over the entire period.
 
-## Correlation Matrix
+## Correlation Matrix Display The Relationships between Every Pairwise Combination of Numeric Variables
 ```{r}
 numeric_data <- final_data |> 
   select_if(is.numeric) |> 
@@ -523,5 +524,8 @@ ggplot(cor_long, aes(x = Variable1, y = Variable2, fill = Correlation)) +
     axis.text.x = element_text(angle = 45, hjust = 1), 
     plot.title = element_text(hjust = 0.5, face = "bold")
   )
+cor_long_for_d3 <- cor_long
+cor_long_for_d3$Correlation <- round(cor_long_for_d3$Correlation, 3)
+write_json(cor_long_for_d3, "correlation_data.json")
 ```
 The above correlation matrix heatmap help visualize the pairwise correlations between different numeric variables. Marriage Rate and Divorce Rate are highly positively correlated, indicating that higher marriage rates are associated with higher divorce rates. Marriage Rate and fertility rate also has high correlation. Fertility rate is negatively correlated with Year, which aligns with global trends where fertility rates decrease with higher education and over time. It is surprising that the fertility rate is negatively correlated with life expectancy. GDP growth has weaker correlations with most variables, suggesting it does not strongly align with the other variables in this data set. This heatmap provides a useful overview for identifying patterns and relationships within the data.
